@@ -765,7 +765,7 @@ saved before delete
 
 **저장소 전용 사용자 정보 설정**
 ```bash
-$ git config user.name "hevel"
+$ git config user.name "<본인 이름>"
 $ git config user.email "<본인 이메일>"
 ```
 
