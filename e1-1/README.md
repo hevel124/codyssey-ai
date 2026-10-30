@@ -44,7 +44,7 @@
 
 ## 4. 검증 방법
 
-| 항목 | 확인 대상 | 명령 | 확인한 내용 | 결과 위치 |
+| 항목 | 확인 대상 | 검증 명령 | 확인한 내용 | 결과 위치 |
 |---|---|---|---|---|
 | 터미널 | 파일 생성·내용 | `cat note.txt` | `hello codyssey` 출력 | [6-1](#6-1-터미널-조작-로그) |
 | 터미널 | 복사·이동·이름 변경 | `ls -la backup` | `renamed.txt`가 `backup/` 안에 있음 | [6-1](#6-1-터미널-조작-로그) |
@@ -70,7 +70,7 @@
 | 마운트 | 바인드 마운트 연결 | `docker inspect -f '{{range .Mounts}}...'` | `bind .../e1-1/bind -> /usr/share/nginx/html` | [6-7](#6-7-바인드-마운트-반영--볼륨-영속성-증거) |
 | 마운트 | 호스트 변경 반영 | `curl -s http://localhost:8092` (수정 전/후) | `v1` → `v2 (edited on host)` | [6-7](#6-7-바인드-마운트-반영--볼륨-영속성-증거) |
 | 볼륨 | 볼륨 생성 | `docker volume ls`, `docker volume inspect` | `e1-1-vol` 목록 표시, `Mountpoint` 출력 | [6-7](#6-7-바인드-마운트-반영--볼륨-영속성-증거) |
-| 볼륨 | 컨테이너 삭제 후 볼륨 유지 | `docker rm -f vol-writer`, `docker volume ls` | 컨테이너는 사라지고 `e1-1-vol`은 남음 | [6-7](#6-7-바인드-마운트-반영--볼륨-영속성-증거) |
+| 볼륨 | 컨테이너 삭제 후 볼륨 유지 | `docker ps -a`, `docker volume ls` | 컨테이너는 사라지고 `e1-1-vol`은 남음 | [6-7](#6-7-바인드-마운트-반영--볼륨-영속성-증거) |
 | 볼륨 | 데이터 영속성 | `docker exec vol-reader cat /app-data/memo.txt` | 새 컨테이너에서 `saved before delete` 출력 | [6-7](#6-7-바인드-마운트-반영--볼륨-영속성-증거) |
 | Git | 기본 브랜치 설정 | `git config --list` | `init.defaultbranch=main` | [6-8](#6-8-git-설정-및-githubvscode-연동-증거) |
 | Git | 저장소 사용자 정보 | `git config user.name` | `hevel` | [6-8](#6-8-git-설정-및-githubvscode-연동-증거) |
@@ -127,8 +127,6 @@ $ curl -s http://localhost:8093
 > 각 작업의 명령과 출력은 터미널에 나온 그대로 옮김. 단, 이미지 다운로드(`Pulling ...`)는 진행 표시가 같은 줄에 덮어써지므로 다운로드가 끝난 시점에 화면에 남은 내용을 기록.
 
 ### 6-1. 터미널 조작 로그
-
-저장소 루트에서 `e1-1/`로 이동 후, 실습 폴더 `practice/`를 만들어 진행.
 
 **이동, 현재 위치 확인**
 ```bash
